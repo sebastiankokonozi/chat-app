@@ -1,50 +1,112 @@
-# Welcome to your Expo app 👋
+# React Native Chat App with Convex
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+A real-time chat application built with React Native, Expo, and Convex. Features include chat room creation, real-time messaging, QR code sharing, and push notifications.
 
-## Get started
+## Features
 
-1. Install dependencies
+- Create and join chat rooms
+- Real-time messaging
+- Share chat rooms via QR codes
+- Push notifications for new messages
+- Modern UI with smooth animations
+- TypeScript support
+- Expo managed workflow
+
+## Prerequisites
+
+- Node.js (v14 or later)
+- npm or yarn
+- Expo CLI
+- Convex account
+
+## Setup
+
+1. Install dependencies:
 
    ```bash
    npm install
    ```
 
-2. Start the app
+2. Create a Convex account at https://dashboard.convex.dev
+
+3. Initialize Convex:
 
    ```bash
-    npx expo start
+   npx convex dev
    ```
 
-In the output, you'll find options to open the app in a
+4. Create a `.env` file with your Convex credentials:
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+   ```
+   CONVEX_URL=your_convex_deployment_url
+   ```
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+5. Start the development server:
 
-## Get a fresh project
+   ```bash
+   npm start
+   ```
 
-When you're ready, run:
+6. Run on your device or simulator:
+   - iOS: `npm run ios`
+   - Android: `npm run android`
+   - Web: `npm run web`
 
-```bash
-npm run reset-project
+## Project Structure
+
+```
+├── app/                 # Expo Router screens
+│   ├── (tabs)/         # Tab-based screens
+│   └── chat/           # Chat room screens
+├── components/         # React components
+├── convex/            # Convex backend
+│   ├── schema.ts      # Database schema
+│   ├── users.ts       # User operations
+│   ├── chatRooms.ts   # Chat room operations
+│   ├── messages.ts    # Messaging operations
+│   └── pushNotifications.ts # Push notification utilities
+├── store/             # State management
+│   └── chatStore.ts   # Zustand store for chat state
+├── types/             # TypeScript types
+├── hooks/             # Custom React hooks
+└── lib/               # Utility libraries
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+## Key Features
 
-## Learn more
+### Real-time Messaging
 
-To learn more about developing your project with Expo, look at the following resources:
+Messages are sent and received in real-time using Convex's subscription-based data synchronization. This ensures all participants see messages instantly without manual refreshing.
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+### QR Code Sharing
 
-## Join the community
+Each chat room has a unique QR code that can be scanned to join. The app supports both generating and scanning QR codes for a seamless sharing experience.
 
-Join our community of developers creating universal apps.
+### Push Notifications
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+Participants receive push notifications when new messages arrive in a chat room, even when the app is in the background. Tapping a notification navigates directly to the relevant chat.
+
+## Technical Decisions
+
+- **Expo Router**: For type-safe navigation and deep linking support
+- **Convex**: For real-time backend functionality and easy setup
+- **Zustand**: For lightweight state management
+- **FlashList**: For optimized list rendering
+- **expo-notifications**: For push notification support
+- **react-native-qrcode-svg**: For QR code generation
+
+## Error Handling
+
+- Graceful error handling for network issues
+- Proper validation of QR codes
+- Push notification permission handling
+- Loading states for async operations
+- Message send retry functionality
+
+## Contributing
+
+1. Fork the repository
+2. Create your feature branch
+3. Commit your changes
+4. Push to the branch
+5. Create a new Pull Request
